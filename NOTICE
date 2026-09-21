@@ -1,3 +1,10 @@
 ChangeClause synthetic evaluation examples.
-Licensing is undecided. All rights reserved except as required by the hosting platform terms.
-Public source does not imply an open-source license. Third-party dependencies retain their own licenses.
+Copyright (c) 2026 the ChangeClause authors.
+
+The example code and documentation in this repository are licensed under
+the MIT License. See LICENSE for the complete terms.
+
+The separately maintained ChangeClause tool has its own PolyForm Perimeter
+License 1.0.1; this repository's MIT license does not relicense that tool.
+Third-party dependencies and separately identified third-party materials
+retain their own licenses.
