@@ -1,7 +1,7 @@
 ---
 name: Example problem
 about: Report an unclear example, reproduction failure, or unexpected result.
-labels: documentation, area: examples
+labels: "documentation, area: examples"
 ---
 
 ## Example and revision
