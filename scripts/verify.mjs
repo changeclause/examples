@@ -8,6 +8,9 @@ import { execFileSync, spawnSync } from 'node:child_process';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const toolRoot = process.argv[2] && path.resolve(process.argv[2]);
 if (!toolRoot) throw new Error('Usage: pnpm verify /absolute/path/to/built/changeclause');
+const expectedMvp = 'b2925f9e6433cc94d5bbb2224dbb1143cc5704b5';
+if (execFileSync('git', ['-C', toolRoot, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim() !== expectedMvp)
+  throw new Error(`Check out and build the public MVP revision ${expectedMvp} before reproducing this example.`);
 const cli = path.join(toolRoot, 'packages/cli/dist/index.js');
 const artifacts = mkdtempSync(path.join(tmpdir(), 'changeclause-pr-example-'));
 const base = execFileSync('git', ['merge-base', 'main', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
