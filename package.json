@@ -1,0 +1,9 @@
+{
+  "name": "changeclause-examples",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24 <25" },
+  "packageManager": "pnpm@10.29.3",
+  "scripts": { "test": "vitest run", "verify": "node scripts/verify.mjs" },
+  "devDependencies": { "vitest": "4.1.11" }
+}
