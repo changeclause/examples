@@ -1,10 +1,11 @@
-name: Behavior tests
+name: Example checks
 on:
   pull_request:
 permissions:
   contents: read
 jobs:
   behavior:
+    name: Behavior tests
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -18,3 +19,36 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
+  contract:
+    name: ChangeClause contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          path: example
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: changeclause/changeclause
+          ref: b2925f9e6433cc94d5bbb2224dbb1143cc5704b5
+          path: changeclause
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.29.3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: pnpm install --frozen-lockfile
+        working-directory: changeclause
+      - run: pnpm build
+        working-directory: changeclause
+      - run: pnpm install --frozen-lockfile
+        working-directory: example
+      - run: git branch main origin/main
+        working-directory: example
+      - run: pnpm verify ../changeclause
+        working-directory: example
