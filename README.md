@@ -1,13 +1,15 @@
 # ChangeClause examples
 
+[Tool](https://github.com/changeclause/changeclause) · [Developer docs](https://changeclause.dev/) · [CI reports and reproduction](https://changeclause.dev/examples/) · [Walkthrough](https://changeclause.com/examples/newsletter/) · [Security](SECURITY.md)
+
 Two intentionally open demonstration PRs show why passing tests and meeting a change contract are different questions. This is synthetic TypeScript code, not a customer incident or a production service.
 
 The request: **add newsletter signup, validate the email, store it, and keep authentication out.** The contract is committed on `main` before either implementation.
 
 | Branch | Behavior tests | ChangeClause outcome |
 | --- | --- | --- |
-| `demo/signup-pass` | 3 pass | PASS |
-| `demo/signup-drift` | 3 pass | DRIFT: forbidden authentication dependency |
+| [PR #1 · `demo/signup-pass`](https://github.com/changeclause/examples/pull/1) | 3 pass | PASS |
+| [PR #2 · `demo/signup-drift`](https://github.com/changeclause/examples/pull/2) | 3 pass | DRIFT: forbidden authentication dependency |
 
 Keep these PRs open as review examples; they are not feature work to merge. The baseline `main` branch deliberately has no signup implementation or behavior tests.
 
@@ -53,3 +55,7 @@ GitHub Actions shows two separate checks: **Behavior tests** and **ChangeClause 
 Imported execution evidence remains self-attested even when the demonstration script runs in GitHub Actions; the MVP does not authenticate CI provenance. Selecting a baseline contract is not authenticated approval. PASS covers only declared supported obligations; unsupported or missing evidence needs review.
 
 [Read the walkthrough](https://changeclause.com/examples/newsletter/) · [Share a tricky change](https://changeclause.com/share/)
+
+## Contributing and reuse
+
+Use the issue templates for unclear examples or reproduction failures. Explain expected behavior and contract outcomes in proposed changes; preserve the deliberately open demonstration PRs. Read [NOTICE](NOTICE) before reusing or contributing code: this repository currently has no open-source license. The public tool has its own separate license.
