@@ -48,6 +48,8 @@ Verification intentionally exits **1** on the drifting branch and **0** on the p
 - `src/newsletter.test.ts`: signup, invalid email, and storage failure. All pass in both branches.
 - `src/auth.ts`: a harmless synthetic helper. The finding is an architectural constraint violation, not a claim of a security vulnerability.
 
-GitHub Actions runs the behavior tests only. It is deliberately labeled **Behavior tests**: a green check does not mean the ChangeClause contract passed. Imported execution evidence is self-attested, not a signed CI attestation. Selecting a baseline contract is not authenticated approval. PASS covers only declared supported obligations; unsupported or missing evidence needs review.
+GitHub Actions shows two separate checks: **Behavior tests** and **ChangeClause contract**. Both pass on the passing PR. On the drifting PR, behavior tests pass and the contract check deliberately fails; inspect its log for `no-auth-boundary`. No exception turns the expected drift into a green contract check. The tool checkout is pinned to the public revision above, with no private repository access or service credentials.
+
+Imported execution evidence remains self-attested even when the demonstration script runs in GitHub Actions; the MVP does not authenticate CI provenance. Selecting a baseline contract is not authenticated approval. PASS covers only declared supported obligations; unsupported or missing evidence needs review.
 
 [Read the walkthrough](https://changeclause.com/examples/newsletter/) · [Share a tricky change](https://changeclause.com/share/)
