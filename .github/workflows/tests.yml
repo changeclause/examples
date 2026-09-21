@@ -50,5 +50,18 @@ jobs:
         working-directory: example
       - run: git branch main origin/main
         working-directory: example
-      - run: pnpm verify ../changeclause
+      - name: Check summary rendering
+        run: node --test scripts/report-checks.mjs
         working-directory: example
+      - name: Verify the change contract
+        id: verify
+        run: pnpm verify ../changeclause
+        working-directory: example
+      - name: Upload verification reports
+        if: always() && steps.verify.outputs.artifacts != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: changeclause-report-${{ github.event.pull_request.number }}
+          path: ${{ steps.verify.outputs.artifacts }}
+          if-no-files-found: error
+          retention-days: 14

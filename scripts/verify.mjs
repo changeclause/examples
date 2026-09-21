@@ -1,6 +1,7 @@
 // Run only after inspecting this synthetic example and installing its dependencies.
 // Tests execute explicitly here. ChangeClause review/verify do not execute target code.
-import { mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, appendFileSync } from 'node:fs';
+import { formatSummary } from './report.mjs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -37,5 +38,12 @@ const report = JSON.parse(verified.stdout);
 console.log(`${report.status} — behavior test exit ${tested.status}, verification exit ${verified.status}`);
 for (const clause of report.results) console.log(`${clause.status.padEnd(10)} ${clause.id}: ${clause.message}`);
 console.log(`Full artifacts: ${artifacts}`);
+const tests = JSON.parse(readFileSync(testReport, 'utf8'));
+const head = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+const expected = { 'demo/signup-pass': 'PASS', 'demo/signup-drift': 'DRIFT' }[process.env.GITHUB_HEAD_REF];
+const summary = formatSummary({ report, tests, testExit: tested.status, verificationExit: verified.status, head, base, expected });
+writeFileSync(path.join(artifacts, 'summary.md'), summary);
+if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `artifacts=${artifacts}\n`);
 // DRIFT/INCOMPLETE are demonstration outcomes, not successful verification.
 process.exitCode = verified.status || tested.status;

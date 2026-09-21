@@ -48,7 +48,7 @@ Verification intentionally exits **1** on the drifting branch and **0** on the p
 - `src/newsletter.test.ts`: signup, invalid email, and storage failure. All pass in both branches.
 - `src/auth.ts`: a harmless synthetic helper. The finding is an architectural constraint violation, not a claim of a security vulnerability.
 
-GitHub Actions shows two separate checks: **Behavior tests** and **ChangeClause contract**. Both pass on the passing PR. On the drifting PR, behavior tests pass and the contract check deliberately fails; inspect its log for `no-auth-boundary`. No exception turns the expected drift into a green contract check. The tool checkout is pinned to the public revision above, with no private repository access or service credentials.
+GitHub Actions shows two separate checks: **Behavior tests** and **ChangeClause contract**. Both pass on the passing PR. On the drifting PR, behavior tests pass and the contract check deliberately fails; open its job summary for the expected-versus-observed table and per-clause findings, including `no-auth-boundary`. A downloadable report artifact contains the full verification JSON, Vitest results, and evidence records. Each demonstration PR also has an expected-result comment linking to a verified run. No exception turns the expected drift into a green contract check. The tool checkout is pinned to the public revision above, with no private repository access or service credentials.
 
 Imported execution evidence remains self-attested even when the demonstration script runs in GitHub Actions; the MVP does not authenticate CI provenance. Selecting a baseline contract is not authenticated approval. PASS covers only declared supported obligations; unsupported or missing evidence needs review.
 
