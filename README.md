@@ -58,4 +58,10 @@ Imported execution evidence remains self-attested even when the demonstration sc
 
 ## Contributing and reuse
 
-Use the issue templates for unclear examples or reproduction failures. Explain expected behavior and contract outcomes in proposed changes; preserve the deliberately open demonstration PRs. Read [NOTICE](NOTICE) before reusing or contributing code: this repository currently has no open-source license. The public tool has its own separate license.
+Use the issue templates for unclear examples or reproduction failures. Explain expected behavior and contract outcomes in proposed changes; preserve the deliberately open demonstration PRs.
+
+## License
+
+The example code and documentation are licensed under the [MIT License](LICENSE). You may use and adapt these examples, including in commercial projects, subject to the license terms and preservation of its copyright and permission notice. See [NOTICE](NOTICE) for the distinction between these examples and separately licensed materials.
+
+The [ChangeClause tool](https://github.com/changeclause/changeclause/blob/main/LICENSE) is separately licensed under PolyForm Perimeter 1.0.1. The examples' MIT license does not change the tool's license.
