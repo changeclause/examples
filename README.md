@@ -23,7 +23,17 @@ pnpm install --frozen-lockfile
 pnpm test
 ```
 
-Build the [ChangeClause MVP](https://github.com/changeclause/changeclause) in a separate checkout, following its README, then:
+Build the [ChangeClause MVP](https://github.com/changeclause/changeclause) in a separate checkout at public revision `b2925f9e6433cc94d5bbb2224dbb1143cc5704b5`:
+
+```sh
+git clone https://github.com/changeclause/changeclause.git
+cd changeclause
+git checkout b2925f9e6433cc94d5bbb2224dbb1143cc5704b5
+pnpm install --frozen-lockfile
+pnpm build
+```
+
+Back in the examples checkout, run:
 
 ```sh
 pnpm verify /absolute/path/to/changeclause
